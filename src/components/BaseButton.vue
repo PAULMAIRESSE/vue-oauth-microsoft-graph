@@ -8,10 +8,6 @@
 
 export default {
     props: {
-        disabled: {
-            type: Boolean,
-            default: false
-        },
         noHoverEffect: {
             type: Boolean,
             default: false
@@ -19,6 +15,13 @@ export default {
         action: {
             type: Function,
             default: () => { }
+        },
+        color: {
+            type: String,
+            default: 'primary',
+            validator: function (value) {
+                return ['primary', 'warn', 'danger'].indexOf(value) !== -1
+            }
         }
     },
     methods: {
@@ -51,43 +54,28 @@ export default {
                 return;
             }
             // Call the action prop function when the button is clicked
-            this.action();
-        }
-    },
-    watch: {
-        disabled: function () {
-            if (this.disabled) {
-                this.$el.classList.add('isactive');
-            } else {
-                this.$el.classList.remove('isactive');
-            }
-            this.$el.disabled = this.disabled;
+            this.action(this);
         },
-        noHoverEffect: function () {
-            if (this.noHoverEffect) {
-                this.$el.classList.remove('clickedEffect');
-            } else {
-                this.$el.classList.add('clickedEffect');
-            }
-        }
     },
     mounted() {
         {
-            this.$el.disabled = this.disabled;
-            if (!this.disabled) {
-                this.$el.classList.add('isactive');
-            }
+            this.$el.classList.add(this.color);
             if (!this.noHoverEffect) {
                 this.$el.classList.add('clickedEffect');
             }
         }
+    },
+    watch: {
+        color: function (newColor) {
+            this.$el.classList.remove('primary', 'warn', 'danger');
+            this.$el.classList.add(newColor);
+        },
     }
 }
 </script>
 
 <style scoped>
 .button {
-    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 24px 32px;
@@ -100,16 +88,47 @@ export default {
     margin: 10px;
 }
 
+.button.primary {
+    background-color: #5cc75f;
+}
+
+.button.warn {
+    background-color: #f7b731;
+}
+
+.button.danger {
+    background-color: #eb3b5a;
+}
+
 .button:hover {
-    background-color: #45a049;
     transform: translateY(-2px);
 }
 
-.button:active {
+.button.primary:hover {
+    background-color: #45a049;
+}
+
+.button.warn:hover {
+    background-color: #f39c12;
+}
+
+.button.danger:hover {
+    background-color: #c9302c;
+}
+
+.button.primary:active {
     background-color: #356f37;
 }
 
-.button.isactive.clickedEffect:active {
+.button.warn:active {
+    background-color: #d35400;
+}
+
+.button.danger:active {
+    background-color: #a93226;
+}
+
+.button.clickedEffect:active {
     transform: scale(1.5) !important;
 }
 
@@ -117,10 +136,29 @@ export default {
     outline: none;
 }
 
-.button:disabled {
-    background-color: #a5d6a7;
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active {
     transform: none !important;
     color: #f1f1f1;
     cursor: not-allowed;
+}
+
+button.primary:disabled,
+button.warn:disabled:hover,
+button.danger:disabled:active {
+    background-color: #a5d6a7;
+}
+
+button.warn:disabled,
+button.warn:disabled:hover,
+button.warn:disabled:active {
+    background-color: #e3dabf;
+}
+
+button.danger:disabled,
+button.danger:disabled:hover,
+button.danger:disabled:active {
+    background-color: #d19f9b;
 }
 </style>
