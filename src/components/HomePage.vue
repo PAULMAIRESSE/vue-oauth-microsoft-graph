@@ -26,6 +26,7 @@ export default {
     },
     data: () => ({
         buttonColor: 'danger',
+        asyncOperationCount: 1
     }),
     methods: {
         handleClick() {
@@ -40,7 +41,8 @@ export default {
             this.buttonColor = colors[nextIndex];
         },
         async handleAsyncClick() {
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate a delay of 2 seconds
+            this.asyncOperationCount++;
+            await new Promise(resolve => setTimeout(resolve, 1000 * this.asyncOperationCount)); // Simulate a delay of 2 seconds
             console.log('Async operation done');
         }
     }
