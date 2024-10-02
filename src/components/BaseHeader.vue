@@ -1,25 +1,45 @@
 <template>
     <header class="header">
         <div class="header-left">
-            <font-awesome-icon icon="home" class="icon" />
-            <span class="home-text">Home</span>
+            <base-button noHoverEffect disabled>
+                <font-awesome-icon icon="home" class="icon" />
+                <span class="home-text">Home</span>
+            </base-button>
         </div>
         <div class="header-right">
-            <font-awesome-icon icon="user" class="icon" />
-            <span class="login-status">Not yet logged-in</span>
+            <base-button noHoverEffect disabled>
+                <font-awesome-icon icon="shopping-cart" class="icon" />
+                <span class="cart-text">Cart</span>
+            </base-button>
+            <base-button noHoverEffect :action="handleLogin">
+                <font-awesome-icon icon="user" class="icon" />
+                <span class="login-status">Not yet logged-in</span>
+            </base-button>
         </div>
     </header>
 </template>
 
 <script>
+
+import BaseButton from './BaseButton.vue';
+
+
 export default {
-    name: 'BaseHeader'
+    name: 'BaseHeader',
+    components: {
+        BaseButton
+    },
+    methods: {
+        handleLogin() {
+            alert('Not yet implemented');
+        }
+    }
 }
 </script>
 
 <style scoped>
 .header {
-    background-color: #4CAF50;
+    background-color: #5cc75f;
     color: white;
     display: flex;
     justify-content: space-between;
