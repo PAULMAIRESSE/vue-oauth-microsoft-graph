@@ -2,26 +2,30 @@
     <div>
         <h1>Home Page</h1>
         <p>Welcome to the Home Page</p>
-        <base-button style="margin: 10px;" :action="handleClick">Click me ! 👀</base-button>
+        <animated-button style="margin: 10px;" @click="handleClick">Click me ! 👀</animated-button>
         <base-button disabled color="warn">Don't click me ! 🫣</base-button>
-        <base-button noHoverEffect :color="buttonColor" :action="handleDangerClick">Click me if you dare
+        <base-button :color="buttonColor" @click="handleDangerClick">Click me if you dare
             !</base-button>
+        <br />
+        <async-button color='warn' @click="handleAsyncClick">Click me to simulate an async operation</async-button>
+
     </div>
 </template>
 
 <script>
+import AnimatedButton from './AnimatedButton.vue';
 import BaseButton from './BaseButton.vue';
-import { ref } from 'vue';
-
-const buttonColor = ref('danger');
+import AsyncButton from './AsyncButton.vue';
 
 export default {
     name: 'HomePage',
     components: {
-        BaseButton
+        BaseButton,
+        AnimatedButton,
+        AsyncButton,
     },
     data: () => ({
-        buttonColor
+        buttonColor: 'danger',
     }),
     methods: {
         handleClick() {
@@ -34,6 +38,10 @@ export default {
             const currentIndex = colors.indexOf(currentColor);
             const nextIndex = (currentIndex + 1) % colors.length;
             this.buttonColor = colors[nextIndex];
+        },
+        async handleAsyncClick() {
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate a delay of 2 seconds
+            console.log('Async operation done');
         }
     }
 }

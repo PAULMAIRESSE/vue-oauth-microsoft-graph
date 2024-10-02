@@ -1,20 +1,20 @@
 <template>
     <header class="header">
         <div class="header-left">
-            <base-button noHoverEffect disabled>
+            <base-button disabled>
                 <font-awesome-icon icon="home" class="icon" />
                 <span class="home-text">Home</span>
             </base-button>
         </div>
         <div class="header-right">
-            <base-button noHoverEffect disabled>
+            <base-button disabled>
                 <font-awesome-icon icon="shopping-cart" class="icon" />
                 <span class="cart-text">Cart</span>
             </base-button>
-            <base-button noHoverEffect :action="handleLogin">
+            <async-button @click="handleLogin">
                 <font-awesome-icon icon="user" class="icon" />
                 <span class="login-status">Not yet logged-in</span>
-            </base-button>
+            </async-button>
         </div>
     </header>
 </template>
@@ -22,16 +22,22 @@
 <script>
 
 import BaseButton from './BaseButton.vue';
+import AsyncButton from './AsyncButton.vue';
 
 
 export default {
     name: 'BaseHeader',
     components: {
-        BaseButton
+        BaseButton,
+        AsyncButton
     },
     methods: {
-        handleLogin() {
-            alert('Not yet implemented');
+        async handleLogin() {
+            // simulate a login action
+            // function returns a promise
+            console.log('Async click handler triggered');
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate a delay of 2 seconds
+            console.log('Async operation done');
         }
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <button class="button" @mousemove="handleMouseMove" @mouseleave="resetRotation" @click="handleClick">
+    <button class="button">
         <slot></slot>
     </button>
 </template>
@@ -8,14 +8,6 @@
 
 export default {
     props: {
-        noHoverEffect: {
-            type: Boolean,
-            default: false
-        },
-        action: {
-            type: Function,
-            default: () => { }
-        },
         color: {
             type: String,
             default: 'primary',
@@ -24,45 +16,9 @@ export default {
             }
         }
     },
-    methods: {
-        handleMouseMove(e) {
-            // check if the button is disabled
-            if (this.$el.disabled || this.noHoverEffect) {
-                return;
-            }
-            const button = e.currentTarget;
-            const rect = button.getBoundingClientRect();
-
-            // Get the position of the mouse relative to the center of the button
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-
-            // Calculate rotation angles (scale the effect with some divisor)
-            const rotateX = -(y / rect.height) * 70; // Rotate up/down
-            const rotateY = (x / rect.width) * 70; // Rotate left/right
-
-            // Apply 3D rotation
-            button.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        },
-        resetRotation(e) {
-            // Reset rotation when the mouse leaves the button
-            e.currentTarget.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-        },
-        handleClick(e) {
-            if (this.$el.disabled) {
-                e.preventDefault();
-                return;
-            }
-            // Call the action prop function when the button is clicked
-            this.action(this);
-        },
-    },
     mounted() {
         {
             this.$el.classList.add(this.color);
-            if (!this.noHoverEffect) {
-                this.$el.classList.add('clickedEffect');
-            }
         }
     },
     watch: {
@@ -128,10 +84,6 @@ export default {
     background-color: #a93226;
 }
 
-.button.clickedEffect:active {
-    transform: scale(1.5) !important;
-}
-
 .button:focus {
     outline: none;
 }
@@ -145,8 +97,8 @@ export default {
 }
 
 button.primary:disabled,
-button.warn:disabled:hover,
-button.danger:disabled:active {
+button.primary:disabled:hover,
+button.primary:disabled:active {
     background-color: #a5d6a7;
 }
 
