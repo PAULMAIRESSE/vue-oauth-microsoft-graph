@@ -7,8 +7,6 @@ const requestedScopes = {
     scopes: ["User.Read"]
 }
 
-console.log(process.env.VUE_APP_OAUTH_CLIENT_ID)
-
 const msalInstance = new msal.PublicClientApplication({
     auth: {
         clientId: process.env.VUE_APP_OAUTH_CLIENT_ID,

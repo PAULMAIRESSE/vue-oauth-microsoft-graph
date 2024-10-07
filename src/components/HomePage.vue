@@ -1,6 +1,8 @@
 <template>
     <div>
         <h1>Home Page</h1>
+        <h3 v-if="user != null">Hello {{ user?.name }}</h3>
+        <h3 v-else>Not logged in</h3>
         <p>Welcome to the Home Page</p>
         <animated-button style="margin: 10px;" @click="handleClick">Click me ! 👀</animated-button>
         <base-button disabled color="warn">Don't click me ! 🫣</base-button>
@@ -8,7 +10,6 @@
             !</base-button>
         <br />
         <async-button color='warn' @click="handleAsyncClick">Click me to simulate an async operation</async-button>
-
     </div>
 </template>
 
@@ -28,6 +29,9 @@ export default {
         buttonColor: 'danger',
         asyncOperationCount: 1
     }),
+    props: {
+        user: Object
+    },
     methods: {
         handleClick() {
             window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ');

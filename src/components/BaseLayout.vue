@@ -1,5 +1,5 @@
 <template>
-    <base-header />
+    <base-header :user="user" @update:user="updateUser" />
     <slot></slot>
     <base-footer />
 </template>
@@ -11,9 +11,18 @@ import BaseHeader from './BaseHeader.vue';
 
 export default {
     name: 'BaseLayout',
+    props: {
+        user: Object
+    },
     components: {
         BaseFooter,
         BaseHeader
+    },
+    emits: ['update:user'],
+    methods: {
+        updateUser(newUser) {
+            this.$emit('update:user', newUser);
+        }
     }
 }
 </script>

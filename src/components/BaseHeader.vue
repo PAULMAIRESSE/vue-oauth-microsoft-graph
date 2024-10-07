@@ -11,7 +11,7 @@
                 <font-awesome-icon icon="shopping-cart" class="icon" />
                 <span class="cart-text">Cart</span>
             </async-button>
-            <signin-button>
+            <signin-button :user="user" @update:user="updateUser">
                 <font-awesome-icon icon="user" class="icon" />
                 <span class="login-status">Not yet logged-in</span>
             </signin-button>
@@ -28,18 +28,18 @@ import SigninButton from './SigninButton.vue';
 
 export default {
     name: 'BaseHeader',
+    props: {
+        user: Object
+    },
     components: {
         BaseButton,
         AsyncButton,
         SigninButton
     },
+    emits: ['update:user'],
     methods: {
-        async handleLogin() {
-            // simulate a login action
-            // function returns a promise
-            console.log('Async click handler triggered');
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate a delay of 2 seconds
-            console.log('Async operation done');
+        updateUser(newUser) {
+            this.$emit('update:user', newUser);
         }
     }
 }
