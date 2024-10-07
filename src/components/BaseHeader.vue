@@ -7,14 +7,14 @@
             </base-button>
         </div>
         <div class="header-right">
-            <base-button disabled>
+            <async-button disabled>
                 <font-awesome-icon icon="shopping-cart" class="icon" />
                 <span class="cart-text">Cart</span>
-            </base-button>
-            <async-button @click="handleLogin">
+            </async-button>
+            <signin-button>
                 <font-awesome-icon icon="user" class="icon" />
                 <span class="login-status">Not yet logged-in</span>
-            </async-button>
+            </signin-button>
         </div>
     </header>
 </template>
@@ -23,13 +23,15 @@
 
 import BaseButton from './BaseButton.vue';
 import AsyncButton from './AsyncButton.vue';
+import SigninButton from './SigninButton.vue';
 
 
 export default {
     name: 'BaseHeader',
     components: {
         BaseButton,
-        AsyncButton
+        AsyncButton,
+        SigninButton
     },
     methods: {
         async handleLogin() {

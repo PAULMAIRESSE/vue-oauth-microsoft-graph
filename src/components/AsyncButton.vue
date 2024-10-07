@@ -32,6 +32,7 @@ export default {
     methods: {
         async handleClick() {
             const originalClick = /** @type {() => Promise<void>} **/(this.$attrs['onClick'] || (async () => { }));
+            console.log(originalClick);
             this.isPending = true;
             originalClick().finally(() => {
                 this.isPending = false;
