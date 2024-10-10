@@ -17,6 +17,7 @@
 import AnimatedButton from './AnimatedButton.vue';
 import BaseButton from './BaseButton.vue';
 import AsyncButton from './AsyncButton.vue';
+import { mapState } from 'vuex';
 
 export default {
     name: 'HomePage',
@@ -29,9 +30,6 @@ export default {
         buttonColor: 'danger',
         asyncOperationCount: 1
     }),
-    props: {
-        user: Object
-    },
     methods: {
         handleClick() {
             window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
@@ -49,6 +47,9 @@ export default {
             await new Promise(resolve => setTimeout(resolve, 1000 * this.asyncOperationCount)); // Simulate a delay of 2 seconds
             console.log('Async operation done');
         }
+    },
+    computed: {
+        ...mapState(['user'])
     }
 }
 </script>

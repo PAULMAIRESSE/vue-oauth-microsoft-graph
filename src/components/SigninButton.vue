@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import store from '@/lib/store';
 import AsyncButton from './AsyncButton.vue';
 import { signInAndGetUser } from '@/lib/microsoftGraph';
 
@@ -11,16 +12,12 @@ export default {
     components: {
         AsyncButton
     },
-    props: {
-        user: Object
-    },
     methods: {
         async signInAndGetUser() {
             const user = await signInAndGetUser();
             // mutate the user prop
-            this.$emit('update:user', user);
+            store.commit('setUser', user);
         }
-    },
-    emits: ['update:user', 'test']
+    }
 }
 </script>
