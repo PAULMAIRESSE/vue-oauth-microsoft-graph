@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { useToast } from 'vue-toastification';
 import { mapState } from 'vuex';
 
 export default {
@@ -15,8 +16,9 @@ export default {
     beforeRouteEnter(to, from, next) {
         next(vm => {
             if (!vm.user) {
-                console.log('User is not logged in. Redirecting to Home page.');
-                vm.$router.push({ name: 'Home', replace: true });
+                const toast = useToast();
+                toast.error('Vous devez être connecté pour accéder à cette page.');
+                vm.$router.push({ name: 'Home' });
             }
         });
     }
