@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import AnimatedButton from './AnimatedButton.vue';
-import BaseButton from './BaseButton.vue';
-import AsyncButton from './AsyncButton.vue';
+import AnimatedButton from '@/components/AnimatedButton.vue';
+import BaseButton from '@/components/BaseButton.vue';
+import AsyncButton from '@/components/AsyncButton.vue';
 import { mapState } from 'vuex';
 
 export default {
