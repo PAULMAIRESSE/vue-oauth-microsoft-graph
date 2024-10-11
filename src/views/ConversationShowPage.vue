@@ -12,10 +12,13 @@ export default {
     computed: {
         ...mapState(['user'])
     },
-    created() {
-        if (!this.user) {
-            this.$router.push('/');
-        }
+    beforeRouteEnter(to, from, next) {
+        next(vm => {
+            if (!vm.user) {
+                console.log('User is not logged in. Redirecting to Home page.');
+                vm.$router.push({ name: 'Home', replace: true });
+            }
+        });
     }
 };
 </script>
