@@ -22,3 +22,7 @@ export async function signInAndGetUser() {
     msalInstance.setActiveAccount(authResult.account);
     return authResult.account;
 }
+
+export async function signOut() {
+    await msalInstance.logoutPopup();
+}
