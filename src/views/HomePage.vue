@@ -36,7 +36,7 @@ export default {
         },
         handleDangerClick() {
             // make the props enumerate through the array of colors 
-            const colors = ['primary', 'warn', 'danger'];
+            const colors = ['primary', 'secondary', 'warn', 'danger'];
             const currentColor = this.buttonColor;
             const currentIndex = colors.indexOf(currentColor);
             const nextIndex = (currentIndex + 1) % colors.length;

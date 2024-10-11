@@ -12,7 +12,7 @@ export default {
             type: String,
             default: 'primary',
             validator: function (value) {
-                return ['primary', 'warn', 'danger'].indexOf(value) !== -1
+                return ['primary', 'secondary', 'warn', 'danger'].indexOf(value) !== -1
             }
         }
     },
@@ -23,7 +23,7 @@ export default {
     },
     watch: {
         color: function (newColor) {
-            this.$el.classList.remove('primary', 'warn', 'danger');
+            this.$el.classList.remove('primary', 'secondary', 'warn', 'danger');
             this.$el.classList.add(newColor);
         },
     }
@@ -48,6 +48,10 @@ export default {
     background-color: #5cc75f;
 }
 
+.button.secondary {
+    background-color: #42b983;
+}
+
 .button.warn {
     background-color: #f7b731;
 }
@@ -64,6 +68,10 @@ export default {
     background-color: #45a049;
 }
 
+.button.secondary:hover {
+    background-color: #2c7a7b;
+}
+
 .button.warn:hover {
     background-color: #f39c12;
 }
@@ -74,6 +82,10 @@ export default {
 
 .button.primary:active {
     background-color: #356f37;
+}
+
+.button.secondary:active {
+    background-color: #1e5f5b;
 }
 
 .button.warn:active {
@@ -112,5 +124,11 @@ button.danger:disabled,
 button.danger:disabled:hover,
 button.danger:disabled:active {
     background-color: #d19f9b;
+}
+
+button.secondary:disabled,
+button.secondary:disabled:hover,
+button.secondary:disabled:active {
+    background-color: #a3c4bc;
 }
 </style>

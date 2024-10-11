@@ -1,10 +1,14 @@
 <template>
     <header class="header">
         <div class="header-left">
-            <base-button disabled>
+            <router-button to="/" color="secondary">
                 <font-awesome-icon icon="home" class="icon" />
-                <span class="home-text">Home</span>
-            </base-button>
+                <span>Home</span>
+            </router-button>
+            <router-button to="/conversations" color="secondary" v-if="user != null">
+                <font-awesome-icon icon="home" class="icon" />
+                <span>Conversation</span>
+            </router-button>
         </div>
         <div class="header-right">
             <async-button disabled>
@@ -20,18 +24,20 @@
 </template>
 
 <script>
-
-import BaseButton from './BaseButton.vue';
 import AsyncButton from './AsyncButton.vue';
 import SigninButton from './SigninButton.vue';
-
+import RouterButton from './RouterButton.vue';
+import { mapState } from 'vuex';
 
 export default {
     name: 'BaseHeader',
     components: {
-        BaseButton,
         AsyncButton,
-        SigninButton
+        SigninButton,
+        RouterButton
+    },
+    computed: {
+        ...mapState(['user'])
     }
 }
 </script>

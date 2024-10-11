@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/views/HomePage.vue';
 import ConversationShowPage from '@/views/ConversationShowPage.vue';
+import NotFoundPage from '@/views/NotFoundPage.vue';
 
 const routes = [
     {
@@ -9,14 +10,19 @@ const routes = [
         component: HomePage
     },
     {
-        path: '/conversation/:id',
+        path: '/conversations/:id',
         name: 'ConversationShow',
         component: ConversationShowPage
     },
     {
-        path: '/conversation',
+        path: '/conversations',
         name: 'ConversationShowAll',
         component: ConversationShowPage
+    }, // 404 page
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: NotFoundPage
     }
 ];
 
