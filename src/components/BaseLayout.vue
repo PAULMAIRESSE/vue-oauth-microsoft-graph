@@ -1,7 +1,12 @@
 <template>
-    <base-header />
-    <slot></slot>
-    <base-footer />
+    <div class="layout">
+        <base-header />
+        <div class="content">
+            <slot></slot>
+        </div>
+        <div class="footer-padding"></div>
+        <base-footer />
+    </div>
 </template>
 
 <script>
@@ -18,9 +23,6 @@ export default {
 }
 </script>
 
-
-
-
 <style>
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -35,5 +37,21 @@ export default {
 body {
     margin: 0;
     padding: 0;
+}
+</style>
+
+<style scoped>
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    justify-content: center;
 }
 </style>

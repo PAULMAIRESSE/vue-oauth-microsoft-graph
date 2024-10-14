@@ -19,9 +19,11 @@ export default {
     color: white;
     text-align: center;
     padding: 10px;
-    position: fixed;
     bottom: 0;
-    width: 100%;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .footer a {

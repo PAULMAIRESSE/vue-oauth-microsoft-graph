@@ -34,7 +34,6 @@ export default {
 .mail-card {
     border: 1px solid #ccc;
     padding: 16px;
-    margin: 8px 10px;
     border-radius: 4px;
     background-color: #f9f9f9;
     text-align: left;

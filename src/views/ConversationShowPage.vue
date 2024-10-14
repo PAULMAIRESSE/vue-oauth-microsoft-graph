@@ -1,17 +1,14 @@
 <template>
-    <div>
+    <div class="conversation-show-page">
         <h1>Conversation Show Page</h1>
-        <div class="conversation-show-page">
+        <div class="conversation-content">
             <div class="mail-list" v-if="mails.length">
-                <ul>
-                    <li v-for="mail in mails" :key="mail.id">
-                        <MailCard :email="mail" />
-                    </li>
-                </ul>
+                <div v-for="mail in mails" :key="mail.id">
+                    <MailCard :email="mail" />
+                </div>
             </div>
-            <div class="mail-details" v-if="id">
-                <MailDetails :mailId="id" />
-            </div>
+            <div class="vertical-separator" v-if="mails.length && id"></div>
+            <MailDetails :mailId="id" v-if="id" />
             <p v-else-if="!mails.length">Aucun mail trouvé.</p>
         </div>
     </div>
@@ -69,23 +66,40 @@ export default {
 </script>
 
 <style scoped>
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
 .conversation-show-page {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.conversation-content {
+    display: flex;
+    flex-grow: 1;
+    /* Make this section take the remaining space */
+    overflow: hidden;
 }
 
 .mail-list {
     flex: 1;
-    padding: 10px;
+    align-self: flex-start;
+    height: 100%;
+    box-sizing: border-box;
+    overflow-y: auto;
+    /* make item with 10px margin between each */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* hide scroll bar */
+    scrollbar-width: thin;
 }
 
-.mail-details {
-    flex: 2;
-    padding: 10px;
-    border-left: 1px solid #ccc;
+.vertical-separator {
+    width: 1px;
+    background-color: #ccc;
+    margin: 0 15px;
 }
 </style>

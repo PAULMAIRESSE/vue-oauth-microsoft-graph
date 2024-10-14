@@ -62,36 +62,18 @@ export default {
 
 <style scoped>
 .mail-details {
-    padding: 20px;
+    flex: 1;
     background-color: #f9f9f9;
+    border-left: 1px solid #ccc;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
 }
 
-.mail-details h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.mail-details p {
-    margin: 10px 0;
-    font-size: 16px;
-    color: #555;
-}
-
-.mail-details strong {
-    color: #000;
-}
-
-.mail-body {
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    white-space: pre-wrap;
-    color: #333;
+.mail-body>* {
+    overflow-wrap: break-word;
 }
 </style>
