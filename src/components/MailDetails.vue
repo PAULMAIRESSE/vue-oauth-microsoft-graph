@@ -7,6 +7,16 @@
             <p><strong>Sujet :</strong> {{ mail.subject }}</p>
             <p><strong>Date :</strong> {{ formatDate(mail.receivedDateTime) }}</p>
             <div class="mail-body" v-html="mailBody"></div>
+            <div class="mail-attachment">
+                <div v-if="loadingAttachments">Chargement des pièces jointes...</div>
+                <div v-else-if="attachments.length">
+                    <h3>Pièces jointes</h3>
+                    <p>Nombres de pièces jointes : {{ attachments.length }}</p>
+                    <attachment-preview v-for="attachment in attachments" v-bind:key="attachment.id"
+                        v-bind:attachment="attachment" />
+                </div>
+                <p v-else>Pas de pièces jointes</p>
+            </div>
         </div>
         <p v-else>Chargement des détails du mail...</p>
     </div>
@@ -14,6 +24,7 @@
 
 <script>
 import { getMailDetails } from '@/lib/microsoftGraph';
+import AttachmentPreview from './AttachmentPreview.vue';
 
 export default {
     name: 'MailDetails',
@@ -23,9 +34,14 @@ export default {
             required: true
         }
     },
+    components: {
+        AttachmentPreview
+    },
     data() {
         return {
-            mail: null
+            mail: null,
+            attachments: [],
+            loadingAttachments: true
         };
     },
     watch: {
@@ -37,7 +53,20 @@ export default {
     methods: {
         async fetchMailDetails() {
             try {
-                this.mail = await getMailDetails(this.mailId);
+                const { data, attachments: attachmentsPromise } = await getMailDetails(this.mailId);
+                this.mail = data;
+                this.attachments = []; // Reset attachments
+                this.loadingAttachments = true; // Mark loading as in progress
+
+                // Handle attachments as a promise
+                attachmentsPromise.then(attachments => {
+                    console.log('Attachments loaded');
+                    this.attachments = attachments;
+                    this.loadingAttachments = false; // Mark loading as done
+                }).catch(error => {
+                    console.error('Erreur lors de la récupération des pièces jointes', error);
+                    this.loadingAttachments = false; // Ensure loading state is reset on error
+                });
             } catch (error) {
                 console.error('Erreur lors de la récupération des détails du mail', error);
             }
@@ -75,5 +104,9 @@ export default {
 
 .mail-body>* {
     overflow-wrap: break-word;
+}
+
+.mail-attachment {
+    margin-top: 20px;
 }
 </style>

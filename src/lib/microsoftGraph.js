@@ -73,7 +73,12 @@ export async function getMailDetails(mailId) {
         headers: { 'Authorization': `Bearer ${tokenResponse.accessToken}` }
     });
 
-    console.log(response?.data);
+    // Query attachments for the specific mail if needed
+    const attachmentsResponse = axios.get(`https://graph.microsoft.com/v1.0/me/messages/${mailId}/attachments`, {
+        headers: { 'Authorization': `Bearer ${tokenResponse.accessToken}` }
+    });
 
-    return response?.data;
+    const attachments = attachmentsResponse.then(response => response.data.value);
+
+    return { data: response?.data, attachments };
 }
