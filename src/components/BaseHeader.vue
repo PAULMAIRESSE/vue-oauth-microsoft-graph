@@ -1,11 +1,11 @@
 <template>
     <header class="header">
         <div class="header-left">
-            <router-button to="/" color="secondary">
+            <router-button :to="{ name: 'Home' }" color="secondary">
                 <font-awesome-icon icon="home" class="icon" />
                 <span>Home</span>
             </router-button>
-            <router-button to="/conversations" color="secondary" v-if="user != null">
+            <router-button :to="{ name: 'ConversationShowAll' }" color="secondary" v-if="user != null">
                 <font-awesome-icon icon="home" class="icon" />
                 <span>Conversation</span>
             </router-button>

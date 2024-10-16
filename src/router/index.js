@@ -25,11 +25,32 @@ const routes = [
         component: NotFoundPage
     }
 ];
+const altRoutes = [
+    {
+        path: '/vue-oauth-microsoft-graph/',
+        name: 'Home',
+        component: HomePage
+    },
+    {
+        path: '/vue-oauth-microsoft-graph/conversations/:id',
+        name: 'ConversationShow',
+        component: ConversationShowPage
+    },
+    {
+        path: '/vue-oauth-microsoft-graph/conversations',
+        name: 'ConversationShowAll',
+        component: ConversationShowPage
+    }, // 404 page
+    {
+        path: '/vue-oauth-microsoft-graph/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: NotFoundPage
+    }
+]
 
 const router = createRouter({
     history: createWebHistory(),
-    base: process.env.NODE_ENV === 'production' ? '/vue-oauth-microsoft-graph/' : '/',
-    routes
+    routes: process.env.NODE_ENV === 'production' ? altRoutes : routes
 });
 
 export default router;

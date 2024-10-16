@@ -16,7 +16,7 @@ export default {
     },
     props: {
         to: {
-            type: String,
+            type: [String, Object],
             required: true
         },
         color: {
@@ -26,7 +26,7 @@ export default {
     },
     computed: {
         isDisabled() {
-            return this.$route.path === this.to;
+            return this.$route.path === this.to || this.$route.name === this.to.name;
         }
     }
 }

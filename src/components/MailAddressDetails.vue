@@ -1,6 +1,6 @@
 <template>
-    <a href="#" @click.prevent="showEmail = !showEmail">{{ showEmail ? emailAddress.name :
-        emailAddress.address }}</a>
+    <a href="#" @click.prevent="showEmail = !showEmail">{{ showEmail ? emailAddress.address :
+        emailAddress.name }}</a>
 </template>
 
 <script>
