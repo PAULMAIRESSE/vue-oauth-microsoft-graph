@@ -5,8 +5,8 @@
             <img :src="getAttachmentUrl(attachment)" :alt="attachment.name" class="attachment-image" />
         </template>
         <template v-else>
-            <a :href="attachment.downloadUrl" target="_blank" class="attachment-file">
-                <i class="file-icon"></i> {{ attachment.name }}
+            <a :href="getAttachmentUrl(attachment)" target="_blank" class="attachment-file">
+                <font-awesome-icon icon="fa-solid fa-file" class="file-icon" />{{ attachment.name }}
             </a>
         </template>
     </div>
@@ -19,7 +19,7 @@
 export default {
     props: {
         attachment: {
-            type: Array,
+            type: Object,
             required: true
         }
     },
@@ -54,14 +54,13 @@ export default {
     align-items: center;
     text-decoration: none;
     color: #333;
+    text-decoration: underline;
 }
 
 .file-icon {
     width: 20px;
     height: 20px;
-    background-color: #666;
     margin-right: 8px;
     display: inline-block;
-    /* Use a file icon from a library or define your own */
 }
 </style>

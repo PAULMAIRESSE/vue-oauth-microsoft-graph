@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { formatRelative } from 'date-fns';
+
 export default {
     name: 'MailCard',
     props: {
@@ -18,7 +20,7 @@ export default {
     },
     methods: {
         formatDate(date) {
-            return new Date(date).toLocaleString();
+            return formatRelative(new Date(date), new Date());
         },
         redirectToConversation() {
             this.$router.push({ name: 'ConversationShow', params: { id: this.email.id } });
