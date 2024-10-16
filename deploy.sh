@@ -15,11 +15,12 @@ cd dist
 git init
 git add -A
 git commit -m 'deploy'
+git config http.postBuffer 524288000
 
 # if you are deploying to https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f https://github.com/PAULMAIRESSE/vue-oauth-microsoft-graph master:gh-pages
+git push -f https://github.com/PAULMAIRESSE/vue-oauth-microsoft-graph.git master:gh-pages
 
 cd -
